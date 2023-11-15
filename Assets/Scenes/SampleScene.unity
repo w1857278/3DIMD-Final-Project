@@ -131,7 +131,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 043792bf995298f469b4ea742658a0a5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -22.93
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 043792bf995298f469b4ea742658a0a5,
         type: 3}
@@ -141,7 +141,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 043792bf995298f469b4ea742658a0a5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 043792bf995298f469b4ea742658a0a5,
         type: 3}
@@ -182,7 +182,7 @@ PrefabInstance:
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: e0a11c6e687310e4e870505ecc39f461, type: 2}
+      objectReference: {fileID: 2100000, guid: 5f5add7dd64d39e459f9a0096e3910e4, type: 2}
     - target: {fileID: 919132149155446097, guid: 043792bf995298f469b4ea742658a0a5,
         type: 3}
       propertyPath: m_Name
@@ -196,6 +196,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1747524802}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 043792bf995298f469b4ea742658a0a5,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1747524806}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 043792bf995298f469b4ea742658a0a5,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1747524807}
   m_SourcePrefab: {fileID: 100100000, guid: 043792bf995298f469b4ea742658a0a5, type: 3}
 --- !u!1 &622439913 stripped
 GameObject:
@@ -528,17 +536,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 043792bf995298f469b4ea742658a0a5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.931957
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 043792bf995298f469b4ea742658a0a5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.0000076293945
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 043792bf995298f469b4ea742658a0a5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.1142988
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 043792bf995298f469b4ea742658a0a5,
         type: 3}
@@ -579,7 +587,7 @@ PrefabInstance:
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: d7408cf104962e44e98486c19a33d45a, type: 2}
+      objectReference: {fileID: 2100000, guid: 3d4507cff10cd684498a540d664e8b42, type: 2}
     - target: {fileID: 919132149155446097, guid: 043792bf995298f469b4ea742658a0a5,
         type: 3}
       propertyPath: m_Name
@@ -588,8 +596,40 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 043792bf995298f469b4ea742658a0a5,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1293200623}
   m_SourcePrefab: {fileID: 100100000, guid: 043792bf995298f469b4ea742658a0a5, type: 3}
+--- !u!1 &1293200619 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 043792bf995298f469b4ea742658a0a5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1202227302}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1293200623
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293200619}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d6b525a813094484abf9c712aeaf86c5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1747524801 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 043792bf995298f469b4ea742658a0a5,
@@ -618,6 +658,39 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1747524806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1747524801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b253180c520163247a081dc68b6c521f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &1747524807
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1747524801}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 15.92, y: 11.502001, z: 15.92}
+  m_Center: {x: 0, y: 5.771, z: 0}
 --- !u!1001 &2128820054
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -629,7 +702,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 043792bf995298f469b4ea742658a0a5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.6247363
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 043792bf995298f469b4ea742658a0a5,
         type: 3}
@@ -639,7 +712,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 043792bf995298f469b4ea742658a0a5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.7857618
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 043792bf995298f469b4ea742658a0a5,
         type: 3}
@@ -680,11 +753,16 @@ PrefabInstance:
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 20fbc65ec1d0a1744a0ba0c740f1b634, type: 2}
+      objectReference: {fileID: 2100000, guid: ca7f8a4a2f4aa7e428fc496904bd6136, type: 2}
     - target: {fileID: 919132149155446097, guid: 043792bf995298f469b4ea742658a0a5,
         type: 3}
       propertyPath: m_Name
       value: Lego Brick 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 043792bf995298f469b4ea742658a0a5,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
