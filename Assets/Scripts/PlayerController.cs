@@ -40,12 +40,11 @@ public class PlayerController : MonoBehaviour
                 if (hit.collider != null && Physics.Raycast(leftClickInteractionRay, out hit)) {
                     Debug.Log("Ray Origin Position: " + leftClickInteractionRay.origin);
                     if (hit.collider == GetComponent<BoxCollider>()){
-                        Debug.Log("Object hit: " + hit.collider.gameObject.tag);
+                        
+                        
                     }
                 }
-            }
-            Debug.DrawRay(leftClickInteractionRay.origin, leftClickInteractionRay.direction * 10f, Color.red, 1f);
-             
+            }             
         }
     }
 
