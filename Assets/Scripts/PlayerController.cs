@@ -24,10 +24,13 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+
+        //Player Movement
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput) * moveSpeed * Time.deltaTime;
 
+        //MouseLook
         rb.MovePosition(rb.position + transform.TransformDirection(movement));
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
@@ -38,21 +41,22 @@ public class PlayerController : MonoBehaviour
         xLook = Mathf.Clamp(xLook, -70f, 70f);
 
         Camera.main.transform.localRotation = Quaternion.Euler(xLook, 0, 0);
-
+        
+        // Create Raycast
         Ray leftClickInteractionRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-
+        
+        // Check to see if ray has hit something
         if (Physics.Raycast(leftClickInteractionRay, out hit)) {
             if (hit.collider != null) {
                 MonoBehaviour hitObject = hit.collider.gameObject.GetComponent<MonoBehaviour>();
-
+                //Check if hit object has LeftClickInteract Function
                 if (hitObject != null) {
                     Type objectType = hitObject.GetType();
                     System.Reflection.MethodInfo methodInfo = objectType.GetMethod("LeftClickInteraction");
-
+                    //Invoke the method when LMB is pressed
                     if (methodInfo != null) {
 
-                        
                         if (Input.GetMouseButtonDown(0)) {
                             methodInfo.Invoke(hitObject, null);
                         }
@@ -61,8 +65,6 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-
-        
     }
 
 }
