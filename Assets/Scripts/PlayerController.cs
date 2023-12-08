@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,9 @@ public class PlayerController : MonoBehaviour
     public Transform playerBody;
     float verticalLookRotation = 0f;
     public float mouseSensitivity = 1000f;
+    private float xLook = 0f;
+
+
     
     // Start is called before the first frame update
     void Start()
@@ -30,22 +34,35 @@ public class PlayerController : MonoBehaviour
         verticalLookRotation -= mouseY;
 
         playerBody.Rotate(Vector3.up * mouseX);
+        xLook -= mouseY;
+        xLook.Clamp()
 
-        if (Input.GetMouseButtonDown(0)) {
-            Debug.Log("Click");
-            Ray leftClickInteractionRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
+        Camera.main.transform.localRotation = Quaternion.Euler(xLook, 0, 0);
+
+        Ray leftClickInteractionRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        // if (Physics.Raycast(leftClickInteractionRay, out hit)) {
+        //     if (hit.collider != null && Physics.Raycast(leftClickInteractionRay, out hit)) {
+        //         Debug.Log("Ray Origin Position: " + leftClickInteractionRay.origin);
+        //         MonoBehaviour hitObject = hit.collider.gameObject.GetComponent<MonoBehaviour>();;
+                
+        //         if (hitObject != null){
+        //             Type objectType = hitObject.GetType();
+        //             Debug.Log("Object Has Interaction Function");
+                    
+        //         }
+        //         else {
+        //             Debug.Log("Object does not have interaction function");
+        //         }
+        //     }
+        // }
+        // if (Input.GetMouseButtonDown(0)) {
+        //     Debug.Log("Click");
             
-            if (Physics.Raycast(leftClickInteractionRay, out hit)) {
-                if (hit.collider != null && Physics.Raycast(leftClickInteractionRay, out hit)) {
-                    Debug.Log("Ray Origin Position: " + leftClickInteractionRay.origin);
-                    if (hit.collider == GetComponent<BoxCollider>()){
-                        
-                        
-                    }
-                }
-            }             
-        }
+            
+                         
+        // }
     }
 
 }
