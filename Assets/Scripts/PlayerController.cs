@@ -35,34 +35,34 @@ public class PlayerController : MonoBehaviour
 
         playerBody.Rotate(Vector3.up * mouseX);
         xLook -= mouseY;
-        // xLook.Math.Clamp();
+        xLook = Mathf.Clamp(xLook, -70f, 70f);
 
         Camera.main.transform.localRotation = Quaternion.Euler(xLook, 0, 0);
 
         Ray leftClickInteractionRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        // if (Physics.Raycast(leftClickInteractionRay, out hit)) {
-        //     if (hit.collider != null && Physics.Raycast(leftClickInteractionRay, out hit)) {
-        //         Debug.Log("Ray Origin Position: " + leftClickInteractionRay.origin);
-        //         MonoBehaviour hitObject = hit.collider.gameObject.GetComponent<MonoBehaviour>();;
-                
-        //         if (hitObject != null){
-        //             Type objectType = hitObject.GetType();
-        //             Debug.Log("Object Has Interaction Function");
-                    
-        //         }
-        //         else {
-        //             Debug.Log("Object does not have interaction function");
-        //         }
-        //     }
-        // }
-        // if (Input.GetMouseButtonDown(0)) {
-        //     Debug.Log("Click");
-            
-            
-                         
-        // }
+        if (Physics.Raycast(leftClickInteractionRay, out hit)) {
+            if (hit.collider != null) {
+                MonoBehaviour hitObject = hit.collider.gameObject.GetComponent<MonoBehaviour>();
+
+                if (hitObject != null) {
+                    Type objectType = hitObject.GetType();
+                    System.Reflection.MethodInfo methodInfo = objectType.GetMethod("LeftClickInteraction");
+
+                    if (methodInfo != null) {
+
+                        
+                        if (Input.GetMouseButtonDown(0)) {
+                            methodInfo.Invoke(hitObject, null);
+                        }
+                        
+                    }
+                }
+            }
+        }
+
+        
     }
 
 }
