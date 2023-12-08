@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
 
         playerBody.Rotate(Vector3.up * mouseX);
         xLook -= mouseY;
-        xLook.Clamp()
+        // xLook.Math.Clamp();
 
         Camera.main.transform.localRotation = Quaternion.Euler(xLook, 0, 0);
 
