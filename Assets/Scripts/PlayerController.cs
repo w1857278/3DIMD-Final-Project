@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
 
     public void CameraShift(Vector3 cameraLocation, Vector3 cameraFocus) {
         Camera.main.transform.position =  cameraLocation;
-        Camera.main.transform.rotation = Quaternion.LookRotation(cameraFocus);
+        Camera.main.transform.rotation = Quaternion.LookRotation(cameraFocus - transform.position);
         LockCamera();
     }
     public void ReturnCamera() {
