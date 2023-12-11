@@ -208,7 +208,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d98d9e42ab1ad9542b72bdd23417db29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: []
   moveSpeed: 10
   playerBody: {fileID: 10221033}
   mouseSensitivity: 1000
@@ -326,6 +325,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 272556282}
+  - {fileID: 1372229746}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 91.123, z: 0}
 --- !u!1 &10585424 stripped
@@ -4444,7 +4444,7 @@ GameObject:
   - component: {fileID: 996412589}
   m_Layer: 0
   m_Name: CamPosition
-  m_TagString: Untagged
+  m_TagString: CamPosition
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5289,6 +5289,37 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &1372229745
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1372229746}
+  m_Layer: 0
+  m_Name: CameraBase
+  m_TagString: CamPosition
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1372229746
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1372229745}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 10221033}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1449324542 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1305358248150825415, guid: 80381bddf9642fa4abfb40283475ee2d,

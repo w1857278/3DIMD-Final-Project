@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         
         // Check to see if ray has hit something
-        if (Physics.Raycast(leftClickInteractionRay, out hit)) {
+        if (Physics.Raycast(leftClickInteractionRay, out hit, 10f)) {
             if (hit.collider != null) {
                 MonoBehaviour hitObject = hit.collider.gameObject.GetComponent<MonoBehaviour>();
                 //Check if hit object has LeftClickInteract Function
