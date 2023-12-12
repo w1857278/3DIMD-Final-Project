@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
         xLook = Mathf.Clamp(xLook, -70f, 70f);
 
         if(cameraControlEnabled) {
-        playerBody.Rotate(Vector3.up * mouseX);
+        transform.Rotate(Vector3.up * mouseX);
         Camera.main.transform.localRotation = Quaternion.Euler(xLook, 0, 0);
         }
         
@@ -97,18 +97,17 @@ public class PlayerController : MonoBehaviour
     public void ReturnCamera() {
         
         
-        Debug.Log(transform.childCount);
         foreach(Transform child in transform) {
-            Debug.Log("Child");
             if(child.tag == "CamPosition") camChild = child;
         };
         UnlockCamera();
         Camera.main.transform.position = camChild.transform.position;
     }
-    public void addItem(Item item) {
-
+    public void AddItem(Item item) {
+        inventory.Add(item);
+        Debug.Log(inventory);
     }
-    public void checkHasItem(Item item) {
+    public void CheckHasItem(Item item) {
 
     }
 }
