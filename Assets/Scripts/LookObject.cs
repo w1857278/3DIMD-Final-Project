@@ -18,6 +18,7 @@ public class LookObject : MonoBehaviour
         
         playerScript = player.GetComponent<PlayerController>();
         foreach(Transform child in transform) {
+            Debug.Log("Child");
             if(child.tag == "CamPosition") camChild = child;
         }
     }

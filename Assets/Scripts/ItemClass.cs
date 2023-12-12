@@ -11,7 +11,6 @@ public class Item: MonoBehaviour
     public GameObject meshModel;
     public Sprite icon;
 
-    public Item item;
     public PlayerController playerScript;
     
     void Start() {
@@ -19,19 +18,14 @@ public class Item: MonoBehaviour
         playerScript = player.GetComponent<PlayerController>();
     }
 
-    public Item(int ID, string NAME, GameObject MESHMODEL, Sprite ICON) {
-        id = ID;
-        itemName = NAME;
-        meshModel = MESHMODEL;
-        icon = ICON;
-    }
-    public Item() {
 
-    }
 
     public void LeftClickInteraction() {
-        Debug.Log("Click");
-        item  = new Item(id, itemName, meshModel, icon);
+        Item item  =  gameObject.AddComponent<Item>();
+        item.id = id;
+        item.itemName = itemName;
+        item.meshModel = meshModel;
+        item.icon = icon;
         playerScript.AddItem(item);
         Destroy(gameObject);
     }

@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     private bool cameraControlEnabled = true;
     private bool movementEnabled = true;
     Transform camChild;
+    public UI ui;
+    
     
     // Start is called before the first frame update
     void Start()
@@ -24,6 +26,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         rb.freezeRotation = true;
+
         
     }
 
@@ -105,9 +108,9 @@ public class PlayerController : MonoBehaviour
     }
     public void AddItem(Item item) {
         inventory.Add(item);
-        Debug.Log(inventory);
+        ui.UpdateUI();
     }
-    public void CheckHasItem(Item item) {
+    public void CheckHasItem(int itemID) {
 
     }
 }
