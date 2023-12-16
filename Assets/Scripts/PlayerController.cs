@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+
+    public List<Item> inventory = new List<Item>();
     public float moveSpeed = 5f; 
     Rigidbody rb; 
     public Transform playerBody;
@@ -12,7 +14,11 @@ public class PlayerController : MonoBehaviour
     public float mouseSensitivity = 1000f;
     private float xLook = 0f;
 
-
+    private bool cameraControlEnabled = true;
+    private bool movementEnabled = true;
+    Transform camChild;
+    public UI ui;
+    
     
     // Start is called before the first frame update
     void Start()
@@ -20,6 +26,8 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         rb.freezeRotation = true;
+
+        
     }
 
     void Update()
@@ -28,26 +36,32 @@ public class PlayerController : MonoBehaviour
         //Player Movement
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
+        
         Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput) * moveSpeed * Time.deltaTime;
+        if(movementEnabled) {
+            rb.MovePosition(rb.position + transform.TransformDirection(movement));
+        }
 
         //MouseLook
-        rb.MovePosition(rb.position + transform.TransformDirection(movement));
+        
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
         verticalLookRotation -= mouseY;
-
-        playerBody.Rotate(Vector3.up * mouseX);
         xLook -= mouseY;
         xLook = Mathf.Clamp(xLook, -70f, 70f);
 
+        if(cameraControlEnabled) {
+        transform.Rotate(Vector3.up * mouseX);
         Camera.main.transform.localRotation = Quaternion.Euler(xLook, 0, 0);
+        }
+        
         
         // Create Raycast
         Ray leftClickInteractionRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         
         // Check to see if ray has hit something
-        if (Physics.Raycast(leftClickInteractionRay, out hit)) {
+        if (Physics.Raycast(leftClickInteractionRay, out hit, 10f)) {
             if (hit.collider != null) {
                 MonoBehaviour hitObject = hit.collider.gameObject.GetComponent<MonoBehaviour>();
                 //Check if hit object has LeftClickInteract Function
@@ -67,4 +81,36 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void LockCamera() {
+        Cursor.lockState = CursorLockMode.Confined;
+        cameraControlEnabled = false;
+        movementEnabled = false;
+    }
+    public void UnlockCamera() {
+        Cursor.lockState = CursorLockMode.Locked;
+        cameraControlEnabled = true;
+        movementEnabled = true;
+    }
+
+    public void CameraShift(Vector3 cameraLocation, Vector3 cameraFocus) {
+        Camera.main.transform.position =  cameraLocation;
+        Camera.main.transform.rotation = Quaternion.LookRotation(cameraFocus - transform.position);
+        LockCamera();
+    }
+    public void ReturnCamera() {
+        
+        
+        foreach(Transform child in transform) {
+            if(child.tag == "CamPosition") camChild = child;
+        };
+        UnlockCamera();
+        Camera.main.transform.position = camChild.transform.position;
+    }
+    public void AddItem(Item item) {
+        inventory.Add(item);
+        ui.UpdateUI();
+    }
+    public void CheckHasItem(int itemID) {
+
+    }
 }
