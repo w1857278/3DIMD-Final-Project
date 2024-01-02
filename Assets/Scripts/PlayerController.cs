@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,11 +15,16 @@ public class PlayerController : MonoBehaviour
     public float mouseSensitivity = 1000f;
     private float xLook = 0f;
 
+    public int coins = 0;
+
     private bool cameraControlEnabled = true;
     private bool movementEnabled = true;
     Transform camChild;
     public UI ui;
+    public Image interactPrompt;
+    public Image negativeInteractPrompt;
     
+    public Image cursorImage;
     
     // Start is called before the first frame update
     void Start()
@@ -26,12 +32,19 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         rb.freezeRotation = true;
-
+        Cursor.visible = false;
+        cursorImage.gameObject.SetActive(false);
         
     }
 
     void Update()
     {
+
+        //Cursor Image replacement
+        Vector2 mousePosition = Input.mousePosition;
+        cursorImage.transform.position = mousePosition;
+
+        
 
         //Player Movement
         float horizontalInput = Input.GetAxis("Horizontal");
@@ -61,6 +74,8 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         
         // Check to see if ray has hit something
+        interactPrompt.gameObject.SetActive(false);
+        negativeInteractPrompt.gameObject.SetActive(false);
         if (Physics.Raycast(leftClickInteractionRay, out hit, 10f)) {
             if (hit.collider != null) {
                 MonoBehaviour hitObject = hit.collider.gameObject.GetComponent<MonoBehaviour>();
@@ -70,7 +85,7 @@ public class PlayerController : MonoBehaviour
                     System.Reflection.MethodInfo methodInfo = objectType.GetMethod("LeftClickInteraction");
                     //Invoke the method when LMB is pressed
                     if (methodInfo != null) {
-
+                        interactPrompt.gameObject.SetActive(true);
                         if (Input.GetMouseButtonDown(0)) {
                             methodInfo.Invoke(hitObject, null);
                         }
@@ -81,15 +96,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void AddCoin() {
+        coins++;
+    }
+
     public void LockCamera() {
         Cursor.lockState = CursorLockMode.Confined;
         cameraControlEnabled = false;
         movementEnabled = false;
+        cursorImage.gameObject.SetActive(true);
     }
     public void UnlockCamera() {
         Cursor.lockState = CursorLockMode.Locked;
         cameraControlEnabled = true;
         movementEnabled = true;
+        cursorImage.gameObject.SetActive(false);
     }
 
     public void CameraShift(Vector3 cameraLocation, Vector3 cameraFocus) {
@@ -98,8 +119,7 @@ public class PlayerController : MonoBehaviour
         LockCamera();
     }
     public void ReturnCamera() {
-        
-        
+
         foreach(Transform child in transform) {
             if(child.tag == "CamPosition") camChild = child;
         };
@@ -111,6 +131,6 @@ public class PlayerController : MonoBehaviour
         ui.UpdateUI();
     }
     public void CheckHasItem(int itemID) {
-
+        
     }
 }
