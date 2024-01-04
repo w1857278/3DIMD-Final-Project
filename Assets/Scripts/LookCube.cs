@@ -32,6 +32,7 @@ public class LookCube : LookObject
     }
     public override void BackOut() {
         // Removes minigame elements when the player backs out of the minigame
+        base.BackOut();
         horizontalSlider.gameObject.SetActive(false);
         verticalSlider.gameObject.SetActive(false);
     }
