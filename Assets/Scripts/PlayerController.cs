@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Assign the rigidbody, hide the cursor and prevent rotation of the player's rigidbody to prevent it from falling over, hide the cursor image
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         rb.freezeRotation = true;
@@ -55,7 +56,7 @@ public class PlayerController : MonoBehaviour
             rb.MovePosition(rb.position + transform.TransformDirection(movement));
         }
 
-        //MouseLook
+        //Mouse Look
         
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
@@ -85,11 +86,36 @@ public class PlayerController : MonoBehaviour
                     System.Reflection.MethodInfo methodInfo = objectType.GetMethod("LeftClickInteraction");
                     //Invoke the method when LMB is pressed
                     if (methodInfo != null) {
-                        interactPrompt.gameObject.SetActive(true);
-                        if (Input.GetMouseButtonDown(0)) {
-                            methodInfo.Invoke(hitObject, null);
+                        //Check if object requires an item through a parameter
+                        if(objectType.GetField("requiresItem") == null) {
+                            interactPrompt.gameObject.SetActive(true);
+                            if (Input.GetMouseButtonDown(0)) {
+                                methodInfo.Invoke(hitObject, null);
+                            }
                         }
-                        
+                        else {
+                            bool hasItem = false;
+                            //Check to see if player has required item by ID
+                            var item = objectType.GetField("itemRequired");
+                            int requiredItem = (int)item.GetValue(hitObject.GetComponent<MonoBehaviour>());
+                            foreach (Item i in inventory) {
+                                if (i.id == requiredItem) {
+                                    hasItem = true;
+                                }
+                                
+                            }
+                            // If player has required item, active the interact function and show interact prompt
+                            if(hasItem) {
+                                interactPrompt.gameObject.SetActive(true);
+                                if (Input.GetMouseButtonDown(0)) {
+                                    methodInfo.Invoke(hitObject, null);
+                                }
+                            }
+                            // If player does not have item, show negative interact prompt
+                            else {
+                                negativeInteractPrompt.gameObject.SetActive(true);
+                            }
+                        }
                     }
                 }
             }
@@ -101,12 +127,14 @@ public class PlayerController : MonoBehaviour
     }
 
     public void LockCamera() {
+        // Stop mouse movement from turning the camera and activate the cursor image sprite
         Cursor.lockState = CursorLockMode.Confined;
         cameraControlEnabled = false;
         movementEnabled = false;
         cursorImage.gameObject.SetActive(true);
     }
     public void UnlockCamera() {
+        // Allow mouse movement to control the camera and hide cursor image
         Cursor.lockState = CursorLockMode.Locked;
         cameraControlEnabled = true;
         movementEnabled = true;
@@ -114,12 +142,13 @@ public class PlayerController : MonoBehaviour
     }
 
     public void CameraShift(Vector3 cameraLocation, Vector3 cameraFocus) {
+        //Move the camera to the selected location and force it to look at second location
         Camera.main.transform.position =  cameraLocation;
         Camera.main.transform.rotation = Quaternion.LookRotation(cameraFocus - transform.position);
         LockCamera();
     }
     public void ReturnCamera() {
-
+        // Move the camera back to the player's position
         foreach(Transform child in transform) {
             if(child.tag == "CamPosition") camChild = child;
         };
@@ -127,10 +156,9 @@ public class PlayerController : MonoBehaviour
         Camera.main.transform.position = camChild.transform.position;
     }
     public void AddItem(Item item) {
+        //Add item to the player's inventory and update the UI to show it in the player's UI Inventory
         inventory.Add(item);
         ui.UpdateUI();
     }
-    public void CheckHasItem(int itemID) {
-        
-    }
+
 }

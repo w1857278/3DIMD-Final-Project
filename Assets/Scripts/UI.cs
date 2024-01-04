@@ -18,7 +18,6 @@ public class UI : MonoBehaviour
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
-        Cursor.visible = false;
 
         horizontalSlider.gameObject.SetActive(false);
         verticalSlider.gameObject.SetActive(false);
@@ -30,10 +29,10 @@ public class UI : MonoBehaviour
 
     }
     public void UpdateUI() {
+        //Updates the coin counter and player inventory. Use UpdateUI() whenever something in the UI needs to change
         coinCounter.text = playerScript.coins.ToString() ;
         for (int i = 0; i < playerScript.inventory.Count; i++) {
             if (i < inventorySlot.Count) {
-                Debug.Log(playerScript.inventory[i].icon);
                 inventorySlot[i].sprite = playerScript.inventory[i].icon;
                 inventorySlot[i].gameObject.SetActive(true);
             }

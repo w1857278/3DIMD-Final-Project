@@ -14,6 +14,7 @@ public class Item: MonoBehaviour
     public PlayerController playerScript;
     
     void Start() {
+        //Assign the player object
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
     }
@@ -21,6 +22,7 @@ public class Item: MonoBehaviour
 
 
     public void LeftClickInteraction() {
+        // Create an instance of item class based on assigned properties in Inspector, add it to the player's inventory and then remove this gameobject
         Item item  =  gameObject.AddComponent<Item>();
         item.id = id;
         item.itemName = itemName;
