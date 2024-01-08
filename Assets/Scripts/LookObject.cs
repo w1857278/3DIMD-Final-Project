@@ -35,6 +35,7 @@ public class LookObject : MonoBehaviour
     public virtual void BackOut() {
         //Return the player camera to player body and allow mouse look
         playerScript.ReturnCamera();
+        interacting = false;
     }
     public virtual void InteractingUpdate() {
         // Update method while the player is in "Minigame mode"

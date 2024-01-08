@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class DigMound : LookObject
 {
+    public bool requiresItem = true;
+    public int itemRequired = 1;
     public Slider verticalSlider;
     public int digTurns = 0;
     public float baseScale = 600f;
