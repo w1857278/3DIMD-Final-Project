@@ -37,6 +37,9 @@ public class Door : LookObject
         for(int i=0; i < 10; i++) {
             plank.transform.position -= new Vector3(0, .002f, 0 );
         }
+        for(int i=0; i<10; i++) {
+            door.transform.rotation = Quaternion.Euler(0, -87.17f + (i*10), 0 );
+        }
         Invoke("BackOut", 2f);
         
     }
@@ -50,6 +53,7 @@ public class Door : LookObject
     public override void BackOut() {
         // Removes minigame elements when the player backs out of the minigame
         base.BackOut();
+        gameObject.SetActive(false);
         verticalSlider.gameObject.SetActive(false);
         axe.SetActive(false);
 
